@@ -3,12 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	trainerService "github.com/rifat-simoom/go-clean-architecture/internal/trainer"
 	"os"
 
 	"github.com/krzysztofreczek/go-structurizr/pkg/scraper"
 	"github.com/krzysztofreczek/go-structurizr/pkg/view"
 
-	trainerService "github.com/rifat-simoom/go-clean-architecture/internal/trainer/service"
 	trainingsService "github.com/rifat-simoom/go-clean-architecture/internal/trainings/service"
 )
 

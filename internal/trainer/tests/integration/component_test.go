@@ -1,7 +1,9 @@
-package service
+package integration
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer"
+	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation"
 	"log"
 	"net/http"
 	"os"
@@ -14,7 +16,6 @@ import (
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/tests"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/ports"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 )
@@ -71,16 +72,16 @@ func TestUnauthorizedForAttendee(t *testing.T) {
 }
 
 func startService() bool {
-	app := NewApplication(context.Background())
+	app := main.NewApplication(context.Background())
 
 	trainerHTTPAddr := os.Getenv("TRAINER_HTTP_ADDR")
 	go server.RunHTTPServerOnAddr(trainerHTTPAddr, func(router chi.Router) http.Handler {
-		return ports.HandlerFromMux(ports.NewHttpServer(app), router)
+		return presentation2.HandlerFromMux(presentation2.NewHttpServer(app), router)
 	})
 
 	trainerGrpcAddr := os.Getenv("TRAINER_GRPC_ADDR")
 	go server.RunGRPCServerOnAddr(trainerGrpcAddr, func(server *grpc.Server) {
-		svc := ports.NewGrpcServer(app)
+		svc := presentation2.NewGrpcServer(app)
 		trainer.RegisterTrainerServiceServer(server, svc)
 	})
 

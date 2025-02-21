@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,11 +17,11 @@ type MakeHoursUnavailable struct {
 type MakeHoursUnavailableHandler decorator.CommandHandler[MakeHoursUnavailable]
 
 type makeHoursUnavailableHandler struct {
-	hourRepo hour.Repository
+	hourRepo hour2.Repository
 }
 
 func NewMakeHoursUnavailableHandler(
-	hourRepo hour.Repository,
+	hourRepo hour2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) MakeHoursUnavailableHandler {
@@ -38,7 +38,7 @@ func NewMakeHoursUnavailableHandler(
 
 func (c makeHoursUnavailableHandler) Handle(ctx context.Context, cmd MakeHoursUnavailable) error {
 	for _, hourToUpdate := range cmd.Hours {
-		if err := c.hourRepo.UpdateHour(ctx, hourToUpdate, func(h *hour.Hour) (*hour.Hour, error) {
+		if err := c.hourRepo.UpdateHour(ctx, hourToUpdate, func(h *hour2.Hour) (*hour2.Hour, error) {
 			if err := h.MakeNotAvailable(); err != nil {
 				return nil, err
 			}

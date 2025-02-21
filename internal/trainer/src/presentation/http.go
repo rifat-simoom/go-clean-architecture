@@ -1,22 +1,22 @@
-package ports
+package presentation
 
 import (
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
 	"net/http"
 
 	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 	"github.com/go-chi/render"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 )
 
 type HttpServer struct {
-	app app.Application
+	app application.Application
 }
 
-func NewHttpServer(application app.Application) HttpServer {
+func NewHttpServer(application application.Application) HttpServer {
 	return HttpServer{
 		app: application,
 	}

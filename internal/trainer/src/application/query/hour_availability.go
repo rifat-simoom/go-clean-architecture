@@ -2,10 +2,10 @@ package query
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 

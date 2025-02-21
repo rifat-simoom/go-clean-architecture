@@ -1,9 +1,9 @@
 package hour_test
 
 import (
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"testing"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -21,7 +21,7 @@ func TestHour_MakeNotAvailable_with_scheduled_training(t *testing.T) {
 	t.Parallel()
 	h := newHourWithScheduledTraining(t)
 
-	assert.Equal(t, hour.ErrTrainingScheduled, h.MakeNotAvailable())
+	assert.Equal(t, hour2.ErrTrainingScheduled, h.MakeNotAvailable())
 }
 
 func TestHour_MakeAvailable(t *testing.T) {
@@ -39,7 +39,7 @@ func TestHour_MakeAvailable_with_scheduled_training(t *testing.T) {
 	t.Parallel()
 	h := newHourWithScheduledTraining(t)
 
-	assert.Equal(t, hour.ErrTrainingScheduled, h.MakeAvailable())
+	assert.Equal(t, hour2.ErrTrainingScheduled, h.MakeAvailable())
 }
 
 func TestHour_ScheduleTraining(t *testing.T) {
@@ -56,7 +56,7 @@ func TestHour_ScheduleTraining(t *testing.T) {
 func TestHour_ScheduleTraining_with_not_available(t *testing.T) {
 	t.Parallel()
 	h := newNotAvailableHour(t)
-	assert.Equal(t, hour.ErrHourNotAvailable, h.ScheduleTraining())
+	assert.Equal(t, hour2.ErrHourNotAvailable, h.ScheduleTraining())
 }
 
 func TestHour_CancelTraining(t *testing.T) {
@@ -74,22 +74,22 @@ func TestHour_CancelTraining_no_training_scheduled(t *testing.T) {
 	h, err := testHourFactory.NewAvailableHour(validTrainingHour())
 	require.NoError(t, err)
 
-	assert.Equal(t, hour.ErrNoTrainingScheduled, h.CancelTraining())
+	assert.Equal(t, hour2.ErrNoTrainingScheduled, h.CancelTraining())
 }
 
 func TestNewAvailabilityFromString(t *testing.T) {
 	t.Parallel()
-	testCases := []hour.Availability{
-		hour.Available,
-		hour.NotAvailable,
-		hour.TrainingScheduled,
+	testCases := []hour2.Availability{
+		hour2.Available,
+		hour2.NotAvailable,
+		hour2.TrainingScheduled,
 	}
 
 	for _, tc := range testCases {
 		expectedAvailability := tc
 		t.Run(expectedAvailability.String(), func(t *testing.T) {
 			t.Parallel()
-			availability, err := hour.NewAvailabilityFromString(expectedAvailability.String())
+			availability, err := hour2.NewAvailabilityFromString(expectedAvailability.String())
 			require.NoError(t, err)
 
 			assert.Equal(t, expectedAvailability, availability)
@@ -99,14 +99,14 @@ func TestNewAvailabilityFromString(t *testing.T) {
 
 func TestNewAvailabilityFromString_invalid(t *testing.T) {
 	t.Parallel()
-	_, err := hour.NewAvailabilityFromString("invalid_value")
+	_, err := hour2.NewAvailabilityFromString("invalid_value")
 	assert.Error(t, err)
 
-	_, err = hour.NewAvailabilityFromString("")
+	_, err = hour2.NewAvailabilityFromString("")
 	assert.Error(t, err)
 }
 
-func newHourWithScheduledTraining(t *testing.T) *hour.Hour {
+func newHourWithScheduledTraining(t *testing.T) *hour2.Hour {
 	h, err := testHourFactory.NewAvailableHour(validTrainingHour())
 	require.NoError(t, err)
 
@@ -115,7 +115,7 @@ func newHourWithScheduledTraining(t *testing.T) *hour.Hour {
 	return h
 }
 
-func newNotAvailableHour(t *testing.T) *hour.Hour {
+func newNotAvailableHour(t *testing.T) *hour2.Hour {
 	h, err := testHourFactory.NewAvailableHour(validTrainingHour())
 	require.NoError(t, err)
 

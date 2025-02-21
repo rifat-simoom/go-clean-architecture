@@ -1,15 +1,15 @@
 package hour_test
 
 import (
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"testing"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-var testHourFactory = hour.MustNewFactory(hour.FactoryConfig{
+var testHourFactory = hour2.MustNewFactory(hour2.FactoryConfig{
 	MaxWeeksInTheFutureToSet: 100,
 	MinUtcHour:               0,
 	MaxUtcHour:               24,
@@ -28,14 +28,14 @@ func TestNewAvailableHour_not_full_hour(t *testing.T) {
 	constructorTime := trainingHourWithMinutes(13)
 
 	_, err := testHourFactory.NewAvailableHour(constructorTime)
-	assert.Equal(t, hour.ErrNotFullHour, err)
+	assert.Equal(t, hour2.ErrNotFullHour, err)
 }
 
 func TestNewAvailableHour_too_distant_date(t *testing.T) {
 	t.Parallel()
 	maxWeeksInFuture := 1
 
-	factory := hour.MustNewFactory(hour.FactoryConfig{
+	factory := hour2.MustNewFactory(hour2.FactoryConfig{
 		MaxWeeksInTheFutureToSet: maxWeeksInFuture,
 		MinUtcHour:               0,
 		MaxUtcHour:               0,
@@ -46,7 +46,7 @@ func TestNewAvailableHour_too_distant_date(t *testing.T) {
 	_, err := factory.NewAvailableHour(constructorTime)
 	assert.Equal(
 		t,
-		hour.TooDistantDateError{
+		hour2.TooDistantDateError{
 			MaxWeeksInTheFutureToSet: maxWeeksInFuture,
 			ProvidedDate:             constructorTime,
 		},
@@ -58,16 +58,16 @@ func TestNewAvailableHour_past_date(t *testing.T) {
 	t.Parallel()
 	pastHour := time.Now().Truncate(time.Hour).Add(-time.Hour)
 	_, err := testHourFactory.NewAvailableHour(pastHour)
-	assert.Equal(t, hour.ErrPastHour, err)
+	assert.Equal(t, hour2.ErrPastHour, err)
 
 	currentHour := time.Now().Truncate(time.Hour)
 	_, err = testHourFactory.NewAvailableHour(currentHour)
-	assert.Equal(t, hour.ErrPastHour, err)
+	assert.Equal(t, hour2.ErrPastHour, err)
 }
 
 func TestNewAvailableHour_too_early_hour(t *testing.T) {
 	t.Parallel()
-	factory := hour.MustNewFactory(hour.FactoryConfig{
+	factory := hour2.MustNewFactory(hour2.FactoryConfig{
 		MaxWeeksInTheFutureToSet: 10,
 		MinUtcHour:               12,
 		MaxUtcHour:               18,
@@ -85,7 +85,7 @@ func TestNewAvailableHour_too_early_hour(t *testing.T) {
 	_, err := factory.NewAvailableHour(tooEarlyHour)
 	assert.Equal(
 		t,
-		hour.TooEarlyHourError{
+		hour2.TooEarlyHourError{
 			MinUtcHour:   factory.Config().MinUtcHour,
 			ProvidedTime: tooEarlyHour,
 		},
@@ -95,7 +95,7 @@ func TestNewAvailableHour_too_early_hour(t *testing.T) {
 
 func TestNewAvailableHour_too_late_hour(t *testing.T) {
 	t.Parallel()
-	factory := hour.MustNewFactory(hour.FactoryConfig{
+	factory := hour2.MustNewFactory(hour2.FactoryConfig{
 		MaxWeeksInTheFutureToSet: 10,
 		MinUtcHour:               12,
 		MaxUtcHour:               18,
@@ -113,7 +113,7 @@ func TestNewAvailableHour_too_late_hour(t *testing.T) {
 	_, err := factory.NewAvailableHour(tooEarlyHour)
 	assert.Equal(
 		t,
-		hour.TooLateHourError{
+		hour2.TooLateHourError{
 			MaxUtcHour:   factory.Config().MaxUtcHour,
 			ProvidedTime: tooEarlyHour,
 		},
@@ -135,7 +135,7 @@ func TestUnmarshalHourFromDatabase(t *testing.T) {
 	t.Parallel()
 	trainingTime := validTrainingHour()
 
-	h, err := testHourFactory.UnmarshalHourFromDatabase(trainingTime, hour.TrainingScheduled)
+	h, err := testHourFactory.UnmarshalHourFromDatabase(trainingTime, hour2.TrainingScheduled)
 	require.NoError(t, err)
 
 	assert.Equal(t, trainingTime, h.Time())
@@ -146,12 +146,12 @@ func TestFactoryConfig_Validate(t *testing.T) {
 	t.Parallel()
 	testCases := []struct {
 		Name        string
-		Config      hour.FactoryConfig
+		Config      hour2.FactoryConfig
 		ExpectedErr string
 	}{
 		{
 			Name: "valid",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 10,
 				MinUtcHour:               10,
 				MaxUtcHour:               12,
@@ -160,7 +160,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 		},
 		{
 			Name: "equal_min_and_max_hour",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 10,
 				MinUtcHour:               12,
 				MaxUtcHour:               12,
@@ -169,7 +169,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 		},
 		{
 			Name: "min_hour_after_max_hour",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 10,
 				MinUtcHour:               13,
 				MaxUtcHour:               12,
@@ -178,7 +178,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 		},
 		{
 			Name: "zero_max_weeks",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 0,
 				MinUtcHour:               10,
 				MaxUtcHour:               12,
@@ -187,7 +187,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 		},
 		{
 			Name: "sub_zero_min_hour",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 10,
 				MinUtcHour:               -1,
 				MaxUtcHour:               12,
@@ -196,7 +196,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 		},
 		{
 			Name: "sub_zero_max_hour",
-			Config: hour.FactoryConfig{
+			Config: hour2.FactoryConfig{
 				MaxWeeksInTheFutureToSet: 10,
 				MinUtcHour:               10,
 				MaxUtcHour:               -1,
@@ -222,7 +222,7 @@ func TestFactoryConfig_Validate(t *testing.T) {
 
 func TestNewFactory_invalid_config(t *testing.T) {
 	t.Parallel()
-	f, err := hour.NewFactory(hour.FactoryConfig{})
+	f, err := hour2.NewFactory(hour2.FactoryConfig{})
 	assert.Error(t, err)
 	assert.Zero(t, f)
 }

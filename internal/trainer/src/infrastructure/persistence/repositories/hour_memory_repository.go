@@ -2,10 +2,9 @@ package repositories
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"sync"
 	"time"
-
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 )
 
 type MemoryHourRepository struct {

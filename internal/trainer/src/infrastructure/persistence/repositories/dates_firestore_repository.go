@@ -2,14 +2,13 @@ package repositories
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"sort"
 	"time"
 
-	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
-
 	"cloud.google.com/go/firestore"
+	"github.com/pkg/errors"
 	"google.golang.org/api/iterator"
 )
 

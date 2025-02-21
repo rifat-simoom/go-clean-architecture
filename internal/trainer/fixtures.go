@@ -2,19 +2,19 @@ package main
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
 	"math/rand"
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 	"github.com/sirupsen/logrus"
 )
 
 const daysToSet = 30
 
-func loadFixtures(app app.Application) {
+func loadFixtures(app application.Application) {
 	start := time.Now()
 	ctx := context.Background()
 
@@ -45,7 +45,7 @@ func loadFixtures(app app.Application) {
 	logrus.WithField("after", time.Since(start)).Debug("Trainer fixtures loaded")
 }
 
-func loadTrainerFixtures(ctx context.Context, application app.Application) error {
+func loadTrainerFixtures(ctx context.Context, application application.Application) error {
 	maxDate := time.Now().AddDate(0, 0, daysToSet)
 	localRand := rand.New(rand.NewSource(3))
 
@@ -73,7 +73,7 @@ func loadTrainerFixtures(ctx context.Context, application app.Application) error
 	return nil
 }
 
-func canLoadFixtures(app app.Application, ctx context.Context) bool {
+func canLoadFixtures(app application.Application, ctx context.Context) bool {
 	for {
 		dates, err := app.Queries.TrainerAvailableHours.Handle(ctx, query.AvailableHours{
 			From: time.Now(),

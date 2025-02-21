@@ -1,8 +1,8 @@
-package app
+package application
 
 import (
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
 )
 
 type Application struct {

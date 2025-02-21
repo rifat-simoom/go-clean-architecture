@@ -1,24 +1,24 @@
-package ports
+package presentation
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
 	"time"
 
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type GrpcServer struct {
-	app app.Application
+	app application.Application
 }
 
-func NewGrpcServer(application app.Application) GrpcServer {
+func NewGrpcServer(application application.Application) GrpcServer {
 	return GrpcServer{app: application}
 }
 

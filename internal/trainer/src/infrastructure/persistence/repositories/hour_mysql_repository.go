@@ -3,13 +3,13 @@ package repositories
 import (
 	"context"
 	"database/sql"
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"os"
 	"time"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"go.uber.org/multierr"
 )
 
@@ -21,10 +21,10 @@ type mysqlHour struct {
 
 type MySQLHourRepository struct {
 	db          *sqlx.DB
-	hourFactory hour.Factory
+	hourFactory hour2.Factory
 }
 
-func NewMySQLHourRepository(db *sqlx.DB, hourFactory hour.Factory) *MySQLHourRepository {
+func NewMySQLHourRepository(db *sqlx.DB, hourFactory hour2.Factory) *MySQLHourRepository {
 	if db == nil {
 		panic("missing db")
 	}
@@ -40,7 +40,7 @@ type sqlContextGetter interface {
 	GetContext(ctx context.Context, dest interface{}, query string, args ...interface{}) error
 }
 
-func (m MySQLHourRepository) GetHour(ctx context.Context, time time.Time) (*hour.Hour, error) {
+func (m MySQLHourRepository) GetHour(ctx context.Context, time time.Time) (*hour2.Hour, error) {
 	return m.getOrCreateHour(ctx, m.db, time, false)
 }
 
@@ -49,7 +49,7 @@ func (m MySQLHourRepository) getOrCreateHour(
 	db sqlContextGetter,
 	hourTime time.Time,
 	forUpdate bool,
-) (*hour.Hour, error) {
+) (*hour2.Hour, error) {
 	dbHour := mysqlHour{}
 
 	query := "SELECT * FROM `hours` WHERE `hour` = ?"
@@ -65,7 +65,7 @@ func (m MySQLHourRepository) getOrCreateHour(
 		return nil, errors.Wrap(err, "unable to get hour from db")
 	}
 
-	availability, err := hour.NewAvailabilityFromString(dbHour.Availability)
+	availability, err := hour2.NewAvailabilityFromString(dbHour.Availability)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ const mySQLDeadlockErrorCode = 1213
 func (m MySQLHourRepository) UpdateHour(
 	ctx context.Context,
 	hourTime time.Time,
-	updateFn func(h *hour.Hour) (*hour.Hour, error),
+	updateFn func(h *hour2.Hour) (*hour2.Hour, error),
 ) error {
 	for {
 		err := m.updateHour(ctx, hourTime, updateFn)
@@ -99,7 +99,7 @@ func (m MySQLHourRepository) UpdateHour(
 func (m MySQLHourRepository) updateHour(
 	ctx context.Context,
 	hourTime time.Time,
-	updateFn func(h *hour.Hour) (*hour.Hour, error),
+	updateFn func(h *hour2.Hour) (*hour2.Hour, error),
 ) (err error) {
 	tx, err := m.db.Beginx()
 	if err != nil {
@@ -136,7 +136,7 @@ func (m MySQLHourRepository) updateHour(
 
 // upsertHour updates hour if hour already exists in the database.
 // If your doesn't exists, it's inserted.
-func (m MySQLHourRepository) upsertHour(tx *sqlx.Tx, hourToUpdate *hour.Hour) error {
+func (m MySQLHourRepository) upsertHour(tx *sqlx.Tx, hourToUpdate *hour2.Hour) error {
 	updatedDbHour := mysqlHour{
 		Hour:         hourToUpdate.Time().UTC(),
 		Availability: hourToUpdate.Availability().String(),

@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,11 +17,11 @@ type ScheduleTraining struct {
 type ScheduleTrainingHandler decorator.CommandHandler[ScheduleTraining]
 
 type scheduleTrainingHandler struct {
-	hourRepo hour.Repository
+	hourRepo hour2.Repository
 }
 
 func NewScheduleTrainingHandler(
-	hourRepo hour.Repository,
+	hourRepo hour2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) ScheduleTrainingHandler {
@@ -37,7 +37,7 @@ func NewScheduleTrainingHandler(
 }
 
 func (h scheduleTrainingHandler) Handle(ctx context.Context, cmd ScheduleTraining) error {
-	if err := h.hourRepo.UpdateHour(ctx, cmd.Hour, func(h *hour.Hour) (*hour.Hour, error) {
+	if err := h.hourRepo.UpdateHour(ctx, cmd.Hour, func(h *hour2.Hour) (*hour2.Hour, error) {
 		if err := h.ScheduleTraining(); err != nil {
 			return nil, err
 		}

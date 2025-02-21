@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/joho/godotenv"
+	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation"
 	"log"
 	"net/http"
 	"os"
@@ -13,8 +14,6 @@ import (
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/ports"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/service"
 	"google.golang.org/grpc"
 )
 
@@ -27,21 +26,21 @@ func main() {
 
 	ctx := context.Background()
 
-	application := service.NewApplication(ctx)
+	application := NewApplication(ctx)
 
 	serverType := strings.ToLower(os.Getenv("SERVER_TO_RUN"))
 	switch serverType {
 	case "http":
 		go loadFixtures(application)
 		server.RunHTTPServer(func(router chi.Router) http.Handler {
-			return ports.HandlerFromMux(
-				ports.NewHttpServer(application),
+			return presentation2.HandlerFromMux(
+				presentation2.NewHttpServer(application),
 				router,
 			)
 		})
 	case "grpc":
 		server.RunGRPCServer(func(server *grpc.Server) {
-			svc := ports.NewGrpcServer(application)
+			svc := presentation2.NewGrpcServer(application)
 			trainer.RegisterTrainerServiceServer(server, svc)
 		})
 

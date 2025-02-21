@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,11 +17,11 @@ type CancelTraining struct {
 type CancelTrainingHandler decorator.CommandHandler[CancelTraining]
 
 type cancelTrainingHandler struct {
-	hourRepo hour.Repository
+	hourRepo hour2.Repository
 }
 
 func NewCancelTrainingHandler(
-	hourRepo hour.Repository,
+	hourRepo hour2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) CancelTrainingHandler {
@@ -37,7 +37,7 @@ func NewCancelTrainingHandler(
 }
 
 func (h cancelTrainingHandler) Handle(ctx context.Context, cmd CancelTraining) error {
-	if err := h.hourRepo.UpdateHour(ctx, cmd.Hour, func(h *hour.Hour) (*hour.Hour, error) {
+	if err := h.hourRepo.UpdateHour(ctx, cmd.Hour, func(h *hour2.Hour) (*hour2.Hour, error) {
 		if err := h.CancelTraining(); err != nil {
 			return nil, err
 		}

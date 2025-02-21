@@ -2,21 +2,21 @@ package repositories
 
 import (
 	"context"
+	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"cloud.google.com/go/firestore"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type FirestoreHourRepository struct {
 	firestoreClient *firestore.Client
-	hourFactory     hour.Factory
+	hourFactory     hour2.Factory
 }
 
-func NewFirestoreHourRepository(firestoreClient *firestore.Client, hourFactory hour.Factory) *FirestoreHourRepository {
+func NewFirestoreHourRepository(firestoreClient *firestore.Client, hourFactory hour2.Factory) *FirestoreHourRepository {
 	if firestoreClient == nil {
 		panic("missing firestoreClient")
 	}
@@ -27,7 +27,7 @@ func NewFirestoreHourRepository(firestoreClient *firestore.Client, hourFactory h
 	return &FirestoreHourRepository{firestoreClient, hourFactory}
 }
 
-func (f FirestoreHourRepository) GetHour(ctx context.Context, time time.Time) (*hour.Hour, error) {
+func (f FirestoreHourRepository) GetHour(ctx context.Context, time time.Time) (*hour2.Hour, error) {
 	date, err := f.getDateDTO(
 		// getDateDTO should be used both for transactional and non transactional query,
 		// the best way for that is to use closure
@@ -51,7 +51,7 @@ func (f FirestoreHourRepository) GetHour(ctx context.Context, time time.Time) (*
 func (f FirestoreHourRepository) UpdateHour(
 	ctx context.Context,
 	hourTime time.Time,
-	updateFn func(h *hour.Hour) (*hour.Hour, error),
+	updateFn func(h *hour2.Hour) (*hour2.Hour, error),
 ) error {
 	err := f.firestoreClient.RunTransaction(ctx, func(ctx context.Context, transaction *firestore.Transaction) error {
 		dateDocRef := f.documentRef(hourTime)
@@ -116,7 +116,7 @@ func (f FirestoreHourRepository) getDateDTO(
 
 // for now we are keeping backward comparability, because of that it's a bit messy and overcomplicated
 // todo - we will clean it up later with CQRS :-)
-func (f FirestoreHourRepository) domainHourFromDateDTO(date DateModel, hourTime time.Time) (*hour.Hour, error) {
+func (f FirestoreHourRepository) domainHourFromDateDTO(date DateModel, hourTime time.Time) (*hour2.Hour, error) {
 	firebaseHour, found := findHourInDateDTO(date, hourTime)
 	if !found {
 		// in reality this date exists, even if it's not persisted
@@ -133,7 +133,7 @@ func (f FirestoreHourRepository) domainHourFromDateDTO(date DateModel, hourTime 
 
 // for now we are keeping backward comparability, because of that it's a bit messy and overcomplicated
 // todo - we will clean it up later with CQRS :-)
-func updateHourInDataDTO(updatedHour *hour.Hour, firebaseDate *DateModel) {
+func updateHourInDataDTO(updatedHour *hour2.Hour, firebaseDate *DateModel) {
 	firebaseHourDTO := domainHourToDTO(updatedHour)
 
 	hourFound := false
@@ -160,25 +160,25 @@ func updateHourInDataDTO(updatedHour *hour.Hour, firebaseDate *DateModel) {
 	}
 }
 
-func mapAvailabilityFromDTO(firebaseHour HourModel) (hour.Availability, error) {
+func mapAvailabilityFromDTO(firebaseHour HourModel) (hour2.Availability, error) {
 	if firebaseHour.Available && !firebaseHour.HasTrainingScheduled {
-		return hour.Available, nil
+		return hour2.Available, nil
 	}
 	if !firebaseHour.Available && firebaseHour.HasTrainingScheduled {
-		return hour.TrainingScheduled, nil
+		return hour2.TrainingScheduled, nil
 	}
 	if !firebaseHour.Available && !firebaseHour.HasTrainingScheduled {
-		return hour.NotAvailable, nil
+		return hour2.NotAvailable, nil
 	}
 
-	return hour.Availability{}, errors.Errorf(
+	return hour2.Availability{}, errors.Errorf(
 		"unsupported values - Available: %t, HasTrainingScheduled: %t",
 		firebaseHour.Available,
 		firebaseHour.HasTrainingScheduled,
 	)
 }
 
-func domainHourToDTO(updatedHour *hour.Hour) HourModel {
+func domainHourToDTO(updatedHour *hour2.Hour) HourModel {
 	return HourModel{
 		Available:            updatedHour.IsAvailable(),
 		HasTrainingScheduled: updatedHour.HasTrainingScheduled(),
