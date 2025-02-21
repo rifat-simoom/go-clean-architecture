@@ -3,7 +3,8 @@ package integration
 import (
 	"context"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer"
-	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation"
+	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/grpc"
+	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/http"
 	"log"
 	"net/http"
 	"os"
@@ -76,7 +77,7 @@ func startService() bool {
 
 	trainerHTTPAddr := os.Getenv("TRAINER_HTTP_ADDR")
 	go server.RunHTTPServerOnAddr(trainerHTTPAddr, func(router chi.Router) http.Handler {
-		return presentation2.HandlerFromMux(presentation2.NewHttpServer(app), router)
+		return http2.HandlerFromMux(http2.NewHttpServer(app), router)
 	})
 
 	trainerGrpcAddr := os.Getenv("TRAINER_GRPC_ADDR")

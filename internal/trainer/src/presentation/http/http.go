@@ -1,4 +1,4 @@
-package presentation
+package http
 
 import (
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"

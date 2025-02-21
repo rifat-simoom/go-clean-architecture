@@ -2,6 +2,7 @@ package command
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/interfaces/repositories"
 	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
@@ -17,11 +18,11 @@ type CancelTraining struct {
 type CancelTrainingHandler decorator.CommandHandler[CancelTraining]
 
 type cancelTrainingHandler struct {
-	hourRepo hour2.Repository
+	hourRepo repositories.Repository
 }
 
 func NewCancelTrainingHandler(
-	hourRepo hour2.Repository,
+	hourRepo repositories.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) CancelTrainingHandler {

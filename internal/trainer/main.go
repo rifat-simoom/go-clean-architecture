@@ -4,7 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/joho/godotenv"
-	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation"
+	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/grpc"
+	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/http"
 	"log"
 	"net/http"
 	"os"
@@ -33,8 +34,8 @@ func main() {
 	case "http":
 		go loadFixtures(application)
 		server.RunHTTPServer(func(router chi.Router) http.Handler {
-			return presentation2.HandlerFromMux(
-				presentation2.NewHttpServer(application),
+			return http2.HandlerFromMux(
+				http2.NewHttpServer(application),
 				router,
 			)
 		})
