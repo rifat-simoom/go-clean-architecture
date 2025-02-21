@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/command"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"

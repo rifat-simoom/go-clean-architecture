@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	commonerrors "github.com/rifat-simoom/go-clean-architecture/internal/common/errors"
+	commonerrors "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
 )
 
 type Training struct {

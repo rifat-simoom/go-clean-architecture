@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"cloud.google.com/go/firestore"
-	grpcClient "github.com/rifat-simoom/go-clean-architecture/internal/common/client"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	grpcClient "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/adapters"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/command"

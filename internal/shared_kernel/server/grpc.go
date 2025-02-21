@@ -8,7 +8,7 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/logs"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )

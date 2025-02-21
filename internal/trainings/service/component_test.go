@@ -9,8 +9,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/server"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/tests"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/tests"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/ports"
 	"github.com/stretchr/testify/require"
 )

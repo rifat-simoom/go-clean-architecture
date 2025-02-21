@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/server/httperr"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
 )
 
 type HttpServer struct {

@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"firebase.google.com/go/v4/auth"
-	commonerrors "github.com/rifat-simoom/go-clean-architecture/internal/common/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/server/httperr"
+	commonerrors "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
 )
 
 type FirebaseHttpMiddleware struct {

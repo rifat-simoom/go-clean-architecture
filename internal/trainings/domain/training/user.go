@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/pkg/errors"
-	commonErrors "github.com/rifat-simoom/go-clean-architecture/internal/common/errors"
+	commonErrors "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
 )
 
 // UserType is enum-like type.

@@ -9,7 +9,7 @@ require (
 )
 
 replace (
-	github.com/rifat-simoom/go-clean-architecture/internal/common => ../../internal/common/
+	github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel => ../../internal/shared_kernel/
 	github.com/rifat-simoom/go-clean-architecture/internal/trainer => ../../internal/trainer/
 	github.com/rifat-simoom/go-clean-architecture/internal/trainings => ../../internal/trainings/
 )

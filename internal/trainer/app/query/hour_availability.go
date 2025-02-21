@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/decorator"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )

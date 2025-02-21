@@ -11,8 +11,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/logs"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/api/option"
 )

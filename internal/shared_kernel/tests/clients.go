@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/client/trainer"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/client/trainings"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/client/users"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client/trainings"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client/users"
 	"github.com/stretchr/testify/require"
 )
 

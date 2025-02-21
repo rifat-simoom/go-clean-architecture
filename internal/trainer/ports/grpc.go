@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/logs"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 )
 
 func InternalError(slug string, err error, w http.ResponseWriter, r *http.Request) {

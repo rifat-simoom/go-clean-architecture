@@ -7,7 +7,7 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
 )
 
 type TrainerGrpc struct {

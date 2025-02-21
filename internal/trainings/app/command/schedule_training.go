@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/decorator"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/logs"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )

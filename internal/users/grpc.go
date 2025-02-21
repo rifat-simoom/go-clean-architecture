@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/users"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
 )
 
 type GrpcServer struct {

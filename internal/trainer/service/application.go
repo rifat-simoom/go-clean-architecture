@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"cloud.google.com/go/firestore"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/adapters"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"

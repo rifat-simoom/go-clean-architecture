@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-chi/render"
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/server/httperr"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/command"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/query"

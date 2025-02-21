@@ -5,8 +5,8 @@ import (
 
 	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 	"github.com/go-chi/render"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/common/server/httperr"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
