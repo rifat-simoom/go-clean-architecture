@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load environment variables from .env file
-cd /var/www/html/repos/wild-workouts-go-ddd-example/
+cd /var/www/html/repos/go-clean-architecture/
 firebase emulators:start --only firestore &
 echo "Waiting for Firestore to start..."
 while ! nc -z localhost 8787; do
