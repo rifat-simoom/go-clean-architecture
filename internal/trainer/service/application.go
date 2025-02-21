@@ -2,11 +2,11 @@ package service
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/infrastructure/persistence/repositories"
 	"os"
 
 	"cloud.google.com/go/firestore"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/adapters"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
 	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
@@ -26,14 +26,14 @@ func NewApplication(ctx context.Context) app.Application {
 		MaxUtcHour:               20,
 	}
 
-	datesRepository := adapters.NewDatesFirestoreRepository(firestoreClient, factoryConfig)
+	datesRepository := repositories.NewDatesFirestoreRepository(firestoreClient, factoryConfig)
 
 	hourFactory, err := hour.NewFactory(factoryConfig)
 	if err != nil {
 		panic(err)
 	}
 
-	hourRepository := adapters.NewFirestoreHourRepository(firestoreClient, hourFactory)
+	hourRepository := repositories.NewFirestoreHourRepository(firestoreClient, hourFactory)
 
 	logger := logrus.NewEntry(logrus.StandardLogger())
 	metricsClient := metrics.NoOp{}
