@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/metrics"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/domain/training"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )

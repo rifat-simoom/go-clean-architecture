@@ -7,11 +7,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/server"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/tests"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/ports"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/server"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/tests"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/ports"
 	"github.com/stretchr/testify/require"
 )
 

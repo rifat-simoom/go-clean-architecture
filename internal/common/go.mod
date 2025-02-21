@@ -1,4 +1,4 @@
-module github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common
+module github.com/rifat-simoom/go-clean-architecture/internal/common
 
 go 1.18
 

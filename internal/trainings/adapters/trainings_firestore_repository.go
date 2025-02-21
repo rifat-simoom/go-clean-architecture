@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"cloud.google.com/go/firestore"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/app/query"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/domain/training"
 	"github.com/pkg/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"google.golang.org/api/iterator"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

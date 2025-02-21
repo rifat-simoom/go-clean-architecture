@@ -3,7 +3,7 @@ package adapters
 import (
 	"context"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/genproto/users"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/users"
 )
 
 type UsersGrpc struct {

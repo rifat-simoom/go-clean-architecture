@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/genproto/trainer"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/query"
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/golang/protobuf/ptypes/timestamp"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

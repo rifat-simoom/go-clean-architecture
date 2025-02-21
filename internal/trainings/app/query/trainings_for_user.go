@@ -3,8 +3,8 @@ package query
 import (
 	"context"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/auth"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/decorator"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/auth"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/decorator"
 	"github.com/sirupsen/logrus"
 )
 

@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/firestore"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/domain/hour"
 	"github.com/pkg/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

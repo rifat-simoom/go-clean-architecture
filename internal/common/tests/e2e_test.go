@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/client"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/genproto/users"
 	"github.com/google/uuid"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/client"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/users"
 	"github.com/stretchr/testify/require"
 )
 

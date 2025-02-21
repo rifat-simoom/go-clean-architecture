@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"cloud.google.com/go/firestore"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/metrics"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/adapters"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/query"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/domain/hour"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/adapters"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 

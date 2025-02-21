@@ -5,10 +5,10 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/query"
 	"github.com/pkg/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 	"github.com/sirupsen/logrus"
 )
 

@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/app/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/app/query"
 )
 
 type Application struct {

@@ -8,13 +8,13 @@ import (
 	"testing"
 	"time"
 
-	trainerHTTP "github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/client/trainer"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/genproto/trainer"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/server"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/tests"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/ports"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
+	trainerHTTP "github.com/rifat-simoom/go-clean-architecture/internal/common/client/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/genproto/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/server"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/tests"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/ports"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 )

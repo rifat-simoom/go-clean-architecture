@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"cloud.google.com/go/firestore"
-	grpcClient "github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/client"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/metrics"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/adapters"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/app"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/app/command"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/app/query"
+	grpcClient "github.com/rifat-simoom/go-clean-architecture/internal/common/client"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/metrics"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/adapters"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/app/query"
 	"github.com/sirupsen/logrus"
 )
 

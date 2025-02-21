@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/decorator"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/common/errors"
-	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/domain/hour"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/decorator"
+	"github.com/rifat-simoom/go-clean-architecture/internal/common/errors"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/domain/hour"
 	"github.com/sirupsen/logrus"
 )
 
