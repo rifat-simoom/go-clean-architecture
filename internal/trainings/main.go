@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/infrastructure/configs"
+	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/presentation/http"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/ports"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/service"
 )
 
 func main() {
@@ -16,10 +16,10 @@ func main() {
 
 	ctx := context.Background()
 
-	app, cleanup := service.NewApplication(ctx)
+	app, cleanup := configs.NewApplication(ctx)
 	defer cleanup()
 
 	server.RunHTTPServer(func(router chi.Router) http.Handler {
-		return ports.HandlerFromMux(ports.NewHttpServer(app), router)
+		return http2.HandlerFromMux(http2.NewHttpServer(app), router)
 	})
 }

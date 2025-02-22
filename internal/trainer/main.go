@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/joho/godotenv"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/configs"
 	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/grpc"
 	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/http"
 	"log"
@@ -27,12 +28,12 @@ func main() {
 
 	ctx := context.Background()
 
-	application := NewApplication(ctx)
+	application := configs.NewApplication(ctx)
 
 	serverType := strings.ToLower(os.Getenv("SERVER_TO_RUN"))
 	switch serverType {
 	case "http":
-		go loadFixtures(application)
+		go configs.LoadFixtures(application)
 		server.RunHTTPServer(func(router chi.Router) http.Handler {
 			return http2.HandlerFromMux(
 				http2.NewHttpServer(application),

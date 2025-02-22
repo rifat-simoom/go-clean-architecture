@@ -2,7 +2,6 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/interfaces/repositories"
 	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
@@ -18,11 +17,11 @@ type MakeHoursUnavailable struct {
 type MakeHoursUnavailableHandler decorator.CommandHandler[MakeHoursUnavailable]
 
 type makeHoursUnavailableHandler struct {
-	hourRepo repositories.Repository
+	hourRepo hour2.Repository
 }
 
 func NewMakeHoursUnavailableHandler(
-	hourRepo repositories.Repository,
+	hourRepo hour2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) MakeHoursUnavailableHandler {

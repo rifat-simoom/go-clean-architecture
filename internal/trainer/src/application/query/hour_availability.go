@@ -2,7 +2,7 @@ package query
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/interfaces/repositories"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
@@ -16,11 +16,11 @@ type HourAvailability struct {
 type HourAvailabilityHandler decorator.QueryHandler[HourAvailability, bool]
 
 type hourAvailabilityHandler struct {
-	hourRepo repositories.Repository
+	hourRepo hour.Repository
 }
 
 func NewHourAvailabilityHandler(
-	hourRepo repositories.Repository,
+	hourRepo hour.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) HourAvailabilityHandler {

@@ -3,7 +3,6 @@ package integration_test
 import (
 	"context"
 	"errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/interfaces/repositories"
 	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
 	repositories2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/persistence/repositories"
 	"math/rand"
@@ -56,7 +55,7 @@ func TestRepository(t *testing.T) {
 
 type Repository struct {
 	Name       string
-	Repository repositories.Repository
+	Repository hour2.Repository
 }
 
 func createRepositories(t *testing.T) []Repository {
@@ -76,7 +75,7 @@ func createRepositories(t *testing.T) []Repository {
 	}
 }
 
-func testUpdateHour(t *testing.T, repository repositories.Repository) {
+func testUpdateHour(t *testing.T, repository hour2.Repository) {
 	t.Helper()
 	ctx := context.Background()
 
@@ -129,7 +128,7 @@ func testUpdateHour(t *testing.T, repository repositories.Repository) {
 	}
 }
 
-func testUpdateHour_parallel(t *testing.T, repository repositories.Repository) {
+func testUpdateHour_parallel(t *testing.T, repository hour2.Repository) {
 	if _, ok := repository.(*repositories2.FirestoreHourRepository); ok {
 		// todo - enable after fix of https://github.com/googleapis/google-cloud-go/issues/2604
 		t.Skip("because of emulator bug, it's not working in Firebase")
@@ -206,7 +205,7 @@ func testUpdateHour_parallel(t *testing.T, repository repositories.Repository) {
 	assert.Len(t, workersScheduledTraining, 1, "only one worker should schedule training")
 }
 
-func testUpdateHour_rollback(t *testing.T, repository repositories.Repository) {
+func testUpdateHour_rollback(t *testing.T, repository hour2.Repository) {
 	t.Helper()
 	ctx := context.Background()
 
@@ -233,7 +232,7 @@ func testUpdateHour_rollback(t *testing.T, repository repositories.Repository) {
 }
 
 // testHourRepository_update_existing is testing path of creating a new hour and updating this hour.
-func testHourRepository_update_existing(t *testing.T, repository repositories.Repository) {
+func testHourRepository_update_existing(t *testing.T, repository hour2.Repository) {
 	t.Helper()
 	ctx := context.Background()
 
@@ -340,7 +339,7 @@ func newValidHourTime() time.Time {
 	}
 }
 
-func assertHourInRepository(ctx context.Context, t *testing.T, repo repositories.Repository, hour *hour2.Hour) {
+func assertHourInRepository(ctx context.Context, t *testing.T, repo hour2.Repository, hour *hour2.Hour) {
 	require.NotNil(t, hour)
 
 	hourFromRepo, err := repo.GetHour(ctx, hour.Time())

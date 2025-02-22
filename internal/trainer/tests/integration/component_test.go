@@ -2,7 +2,7 @@ package integration
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/configs"
 	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/grpc"
 	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/http"
 	"log"
@@ -73,7 +73,7 @@ func TestUnauthorizedForAttendee(t *testing.T) {
 }
 
 func startService() bool {
-	app := main.NewApplication(context.Background())
+	app := configs.NewApplication(context.Background())
 
 	trainerHTTPAddr := os.Getenv("TRAINER_HTTP_ADDR")
 	go server.RunHTTPServerOnAddr(trainerHTTPAddr, func(router chi.Router) http.Handler {
