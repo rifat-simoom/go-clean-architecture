@@ -2,13 +2,13 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/interfaces/services"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"time"
 
 	"github.com/pkg/errors"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
@@ -25,13 +25,13 @@ type ScheduleTraining struct {
 type ScheduleTrainingHandler decorator.CommandHandler[ScheduleTraining]
 
 type scheduleTrainingHandler struct {
-	repo           training.Repository
+	repo           training2.Repository
 	userService    services.UserService
 	trainerService services.TrainerService
 }
 
 func NewScheduleTrainingHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	userService services.UserService,
 	trainerService services.TrainerService,
 	logger *logrus.Entry,
@@ -59,7 +59,7 @@ func (h scheduleTrainingHandler) Handle(ctx context.Context, cmd ScheduleTrainin
 		logs.LogCommandExecution("ScheduleTraining", cmd, err)
 	}()
 
-	tr, err := training.NewTraining(cmd.TrainingUUID, cmd.UserUUID, cmd.UserName, cmd.TrainingTime)
+	tr, err := training2.NewTraining(cmd.TrainingUUID, cmd.UserUUID, cmd.UserName, cmd.TrainingTime)
 	if err != nil {
 		return err
 	}

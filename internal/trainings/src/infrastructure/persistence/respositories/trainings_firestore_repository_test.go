@@ -2,8 +2,9 @@ package respositories_test
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/query"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/infrastructure/persistence/respositories"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/persistence/respositories"
 	"math/rand"
 	"os"
 	"testing"
@@ -13,7 +14,6 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -26,7 +26,7 @@ func TestTrainingsFirestoreRepository_AddTraining(t *testing.T) {
 
 	testCases := []struct {
 		Name                string
-		TrainingConstructor func(t *testing.T) *training.Training
+		TrainingConstructor func(t *testing.T) *training2.Training
 	}{
 		{
 			Name:                "standard_training",
@@ -72,13 +72,13 @@ func TestTrainingsFirestoreRepository_UpdateTraining(t *testing.T) {
 	err := repo.AddTraining(ctx, expectedTraining)
 	require.NoError(t, err)
 
-	var updatedTraining *training.Training
+	var updatedTraining *training2.Training
 
 	err = repo.UpdateTraining(
 		ctx,
 		expectedTraining.UUID(),
-		training.MustNewUser(expectedTraining.UserUUID(), training.Attendee),
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		training2.MustNewUser(expectedTraining.UserUUID(), training2.Attendee),
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			assertTrainingsEquals(t, expectedTraining, tr)
 
 			err := tr.UpdateNotes("note")
@@ -103,10 +103,10 @@ func TestTrainingsFirestoreRepository_GetTraining_not_exists(t *testing.T) {
 	tr, err := repo.GetTraining(
 		context.Background(),
 		trainingUUID,
-		training.MustNewUser(uuid.New().String(), training.Attendee),
+		training2.MustNewUser(uuid.New().String(), training2.Attendee),
 	)
 	assert.Nil(t, tr)
-	assert.EqualError(t, err, training.NotFoundError{trainingUUID}.Error())
+	assert.EqualError(t, err, training2.NotFoundError{trainingUUID}.Error())
 }
 
 func TestTrainingsFirestoreRepository_get_and_update_another_users_training(t *testing.T) {
@@ -121,7 +121,7 @@ func TestTrainingsFirestoreRepository_get_and_update_another_users_training(t *t
 
 	assertPersistedTrainingEquals(t, repo, tr)
 
-	requestingUser := training.MustNewUser(uuid.New().String(), training.Attendee)
+	requestingUser := training2.MustNewUser(uuid.New().String(), training2.Attendee)
 
 	_, err = repo.GetTraining(
 		context.Background(),
@@ -131,7 +131,7 @@ func TestTrainingsFirestoreRepository_get_and_update_another_users_training(t *t
 	assert.EqualError(
 		t,
 		err,
-		training.ForbiddenToSeeTrainingError{
+		training2.ForbiddenToSeeTrainingError{
 			RequestingUserUUID: requestingUser.UUID(),
 			TrainingOwnerUUID:  tr.UserUUID(),
 		}.Error(),
@@ -141,14 +141,14 @@ func TestTrainingsFirestoreRepository_get_and_update_another_users_training(t *t
 		ctx,
 		tr.UUID(),
 		requestingUser,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			return nil, nil
 		},
 	)
 	assert.EqualError(
 		t,
 		err,
-		training.ForbiddenToSeeTrainingError{
+		training2.ForbiddenToSeeTrainingError{
 			RequestingUserUUID: requestingUser.UUID(),
 			TrainingOwnerUUID:  tr.UserUUID(),
 		}.Error(),
@@ -173,7 +173,7 @@ func TestTrainingsFirestoreRepository_AllTrainings(t *testing.T) {
 	trainingWithNote := newTrainingWithNote(t)
 	trainingWithProposedReschedule := newTrainingWithProposedReschedule(t)
 
-	trainingsToAdd := []*training.Training{
+	trainingsToAdd := []*training2.Training{
 		exampleTraining,
 		canceledTraining,
 		trainingWithNote,
@@ -240,7 +240,7 @@ func TestTrainingsFirestoreRepository_FindTrainingsForUser(t *testing.T) {
 
 	userUUID := uuid.New().String()
 
-	tr1, err := training.NewTraining(
+	tr1, err := training2.NewTraining(
 		uuid.New().String(),
 		userUUID,
 		"User",
@@ -251,7 +251,7 @@ func TestTrainingsFirestoreRepository_FindTrainingsForUser(t *testing.T) {
 	err = repo.AddTraining(ctx, tr1)
 	require.NoError(t, err)
 
-	tr2, err := training.NewTraining(
+	tr2, err := training2.NewTraining(
 		uuid.New().String(),
 		userUUID,
 		"User",
@@ -263,7 +263,7 @@ func TestTrainingsFirestoreRepository_FindTrainingsForUser(t *testing.T) {
 	require.NoError(t, err)
 
 	// this training should be not in the list
-	canceledTraining, err := training.NewTraining(
+	canceledTraining, err := training2.NewTraining(
 		uuid.New().String(),
 		userUUID,
 		"User",
@@ -305,9 +305,9 @@ func newRandomTrainingTime() time.Time {
 	return time.Unix(sec, 0)
 }
 
-func newExampleTraining(t *testing.T) *training.Training {
+func newExampleTraining(t *testing.T) *training2.Training {
 	t.Helper()
-	tr, err := training.NewTraining(
+	tr, err := training2.NewTraining(
 		uuid.New().String(),
 		uuid.New().String(),
 		"User",
@@ -318,9 +318,9 @@ func newExampleTraining(t *testing.T) *training.Training {
 	return tr
 }
 
-func newCanceledTraining(t *testing.T) *training.Training {
+func newCanceledTraining(t *testing.T) *training2.Training {
 	t.Helper()
-	tr, err := training.NewTraining(
+	tr, err := training2.NewTraining(
 		uuid.New().String(),
 		uuid.New().String(),
 		"User",
@@ -334,7 +334,7 @@ func newCanceledTraining(t *testing.T) *training.Training {
 	return tr
 }
 
-func newTrainingWithNote(t *testing.T) *training.Training {
+func newTrainingWithNote(t *testing.T) *training2.Training {
 	t.Helper()
 	tr := newExampleTraining(t)
 	err := tr.UpdateNotes("foo")
@@ -343,20 +343,20 @@ func newTrainingWithNote(t *testing.T) *training.Training {
 	return tr
 }
 
-func newTrainingWithProposedReschedule(t *testing.T) *training.Training {
+func newTrainingWithProposedReschedule(t *testing.T) *training2.Training {
 	t.Helper()
 	tr := newExampleTraining(t)
-	tr.ProposeReschedule(time.Now().AddDate(0, 0, 14), training.Trainer)
+	tr.ProposeReschedule(time.Now().AddDate(0, 0, 14), training2.Trainer)
 
 	return tr
 }
 
-func assertPersistedTrainingEquals(t *testing.T, repo respositories.TrainingsFirestoreRepository, tr *training.Training) {
+func assertPersistedTrainingEquals(t *testing.T, repo respositories.TrainingsFirestoreRepository, tr *training2.Training) {
 	t.Helper()
 	persistedTraining, err := repo.GetTraining(
 		context.Background(),
 		tr.UUID(),
-		training.MustNewUser(tr.UserUUID(), training.Attendee),
+		training2.MustNewUser(tr.UserUUID(), training2.Attendee),
 	)
 	require.NoError(t, err)
 
@@ -368,14 +368,14 @@ var cmpRoundTimeOpt = cmp.Comparer(func(x, y time.Time) bool {
 	return x.Truncate(time.Millisecond).Equal(y.Truncate(time.Millisecond))
 })
 
-func assertTrainingsEquals(t *testing.T, tr1, tr2 *training.Training) {
+func assertTrainingsEquals(t *testing.T, tr1, tr2 *training2.Training) {
 	t.Helper()
 	cmpOpts := []cmp.Option{
 		cmpRoundTimeOpt,
 		cmp.AllowUnexported(
-			training.UserType{},
+			training2.UserType{},
 			time.Time{},
-			training.Training{},
+			training2.Training{},
 		),
 	}
 

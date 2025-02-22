@@ -2,8 +2,8 @@ package integration
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/infrastructure/configs"
-	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/presentation/http"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/configs"
+	http3 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/presentation/http"
 	"log"
 	"net/http"
 	"os"
@@ -61,7 +61,7 @@ func startService() bool {
 
 	trainingsHTTPAddr := os.Getenv("TRAININGS_HTTP_ADDR")
 	go server.RunHTTPServerOnAddr(trainingsHTTPAddr, func(router chi.Router) http.Handler {
-		return http2.HandlerFromMux(http2.NewHttpServer(app), router)
+		return http3.HandlerFromMux(http3.NewHttpServer(app), router)
 	})
 
 	ok := tests.WaitForPort(trainingsHTTPAddr)

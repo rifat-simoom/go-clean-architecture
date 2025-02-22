@@ -2,26 +2,26 @@ package command
 
 import (
 	"context"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
 type RejectTrainingReschedule struct {
 	TrainingUUID string
-	User         training.User
+	User         training2.User
 }
 
 type RejectTrainingRescheduleHandler decorator.CommandHandler[RejectTrainingReschedule]
 
 type rejectTrainingRescheduleHandler struct {
-	repo training.Repository
+	repo training2.Repository
 }
 
 func NewRejectTrainingRescheduleHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) RejectTrainingRescheduleHandler {
@@ -45,7 +45,7 @@ func (h rejectTrainingRescheduleHandler) Handle(ctx context.Context, cmd RejectT
 		ctx,
 		cmd.TrainingUUID,
 		cmd.User,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			if err := tr.RejectReschedule(); err != nil {
 				return nil, err
 			}

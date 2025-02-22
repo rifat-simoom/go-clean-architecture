@@ -1,12 +1,12 @@
 package unit_test
 
 import (
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

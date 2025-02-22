@@ -2,29 +2,29 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/interfaces/services"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
 type ApproveTrainingReschedule struct {
 	TrainingUUID string
-	User         training.User
+	User         training2.User
 }
 
 type ApproveTrainingRescheduleHandler decorator.CommandHandler[ApproveTrainingReschedule]
 
 type approveTrainingRescheduleHandler struct {
-	repo           training.Repository
+	repo           training2.Repository
 	userService    services.UserService
 	trainerService services.TrainerService
 }
 
 func NewApproveTrainingRescheduleHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	userService services.UserService,
 	trainerService services.TrainerService,
 	logger *logrus.Entry,
@@ -56,7 +56,7 @@ func (h approveTrainingRescheduleHandler) Handle(ctx context.Context, cmd Approv
 		ctx,
 		cmd.TrainingUUID,
 		cmd.User,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			originalTrainingTime := tr.Time()
 
 			if err := tr.ApproveReschedule(cmd.User.Type()); err != nil {

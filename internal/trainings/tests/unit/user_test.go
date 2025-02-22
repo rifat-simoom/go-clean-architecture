@@ -1,36 +1,36 @@
 package unit_test
 
 import (
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestIsUserAllowedToSeeTraining(t *testing.T) {
 	t.Parallel()
-	attendee1, err := training.NewUser(uuid.New().String(), training.Attendee)
+	attendee1, err := training2.NewUser(uuid.New().String(), training2.Attendee)
 	require.NoError(t, err)
 
-	attendee2, err := training.NewUser(uuid.New().String(), training.Attendee)
+	attendee2, err := training2.NewUser(uuid.New().String(), training2.Attendee)
 	require.NoError(t, err)
 
-	trainer, err := training.NewUser(uuid.New().String(), training.Trainer)
+	trainer, err := training2.NewUser(uuid.New().String(), training2.Trainer)
 	require.NoError(t, err)
 
 	testCases := []struct {
 		Name              string
-		CreateTraining    func(t *testing.T) *training.Training
-		User              training.User
+		CreateTraining    func(t *testing.T) *training2.Training
+		User              training2.User
 		ExpectedIsAllowed bool
 	}{
 		{
 			Name: "attendees_training",
-			CreateTraining: func(t *testing.T) *training.Training {
-				tr, err := training.NewTraining(
+			CreateTraining: func(t *testing.T) *training2.Training {
+				tr, err := training2.NewTraining(
 					uuid.New().String(),
 					attendee1.UUID(),
 					"user name",
@@ -45,8 +45,8 @@ func TestIsUserAllowedToSeeTraining(t *testing.T) {
 		},
 		{
 			Name: "another_attendees_training",
-			CreateTraining: func(t *testing.T) *training.Training {
-				tr, err := training.NewTraining(
+			CreateTraining: func(t *testing.T) *training2.Training {
+				tr, err := training2.NewTraining(
 					uuid.New().String(),
 					attendee1.UUID(),
 					"user name",
@@ -61,8 +61,8 @@ func TestIsUserAllowedToSeeTraining(t *testing.T) {
 		},
 		{
 			Name: "trainer",
-			CreateTraining: func(t *testing.T) *training.Training {
-				tr, err := training.NewTraining(
+			CreateTraining: func(t *testing.T) *training2.Training {
+				tr, err := training2.NewTraining(
 					uuid.New().String(),
 					attendee1.UUID(),
 					"user name",
@@ -83,7 +83,7 @@ func TestIsUserAllowedToSeeTraining(t *testing.T) {
 			t.Parallel()
 			tr := c.CreateTraining(t)
 
-			err := training.CanUserSeeTraining(c.User, *tr)
+			err := training2.CanUserSeeTraining(c.User, *tr)
 
 			if c.ExpectedIsAllowed {
 
@@ -91,7 +91,7 @@ func TestIsUserAllowedToSeeTraining(t *testing.T) {
 				assert.EqualError(
 					t,
 					err,
-					training.ForbiddenToSeeTrainingError{c.User.UUID(), tr.UserUUID()}.Error(),
+					training2.ForbiddenToSeeTrainingError{c.User.UUID(), tr.UserUUID()}.Error(),
 				)
 			}
 		})

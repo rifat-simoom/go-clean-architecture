@@ -2,12 +2,12 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/interfaces/services"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
@@ -15,7 +15,7 @@ type RescheduleTraining struct {
 	TrainingUUID string
 	NewTime      time.Time
 
-	User training.User
+	User training2.User
 
 	NewNotes string
 }
@@ -23,13 +23,13 @@ type RescheduleTraining struct {
 type RescheduleTrainingHandler decorator.CommandHandler[RescheduleTraining]
 
 type rescheduleTrainingHandler struct {
-	repo           training.Repository
+	repo           training2.Repository
 	userService    services.UserService
 	trainerService services.TrainerService
 }
 
 func NewRescheduleTrainingHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	userService services.UserService,
 	trainerService services.TrainerService,
 	logger *logrus.Entry,
@@ -61,7 +61,7 @@ func (h rescheduleTrainingHandler) Handle(ctx context.Context, cmd RescheduleTra
 		ctx,
 		cmd.TrainingUUID,
 		cmd.User,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			originalTrainingTime := tr.Time()
 
 			if err := tr.UpdateNotes(cmd.NewNotes); err != nil {

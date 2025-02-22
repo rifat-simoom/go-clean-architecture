@@ -2,13 +2,13 @@ package respositories
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"sort"
 	"time"
 
 	"cloud.google.com/go/firestore"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"google.golang.org/api/iterator"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -44,7 +44,7 @@ func (r TrainingsFirestoreRepository) trainingsCollection() *firestore.Collectio
 	return r.firestoreClient.Collection("trainings")
 }
 
-func (r TrainingsFirestoreRepository) AddTraining(ctx context.Context, tr *training.Training) error {
+func (r TrainingsFirestoreRepository) AddTraining(ctx context.Context, tr *training2.Training) error {
 	collection := r.trainingsCollection()
 
 	trainingModel := r.marshalTraining(tr)
@@ -57,12 +57,12 @@ func (r TrainingsFirestoreRepository) AddTraining(ctx context.Context, tr *train
 func (r TrainingsFirestoreRepository) GetTraining(
 	ctx context.Context,
 	trainingUUID string,
-	user training.User,
-) (*training.Training, error) {
+	user training2.User,
+) (*training2.Training, error) {
 	firestoreTraining, err := r.trainingsCollection().Doc(trainingUUID).Get(ctx)
 
 	if status.Code(err) == codes.NotFound {
-		return nil, training.NotFoundError{trainingUUID}
+		return nil, training2.NotFoundError{trainingUUID}
 	}
 	if err != nil {
 		return nil, errors.Wrap(err, "unable to get actual docs")
@@ -73,7 +73,7 @@ func (r TrainingsFirestoreRepository) GetTraining(
 		return nil, err
 	}
 
-	if err := training.CanUserSeeTraining(user, *tr); err != nil {
+	if err := training2.CanUserSeeTraining(user, *tr); err != nil {
 		return nil, err
 	}
 
@@ -83,8 +83,8 @@ func (r TrainingsFirestoreRepository) GetTraining(
 func (r TrainingsFirestoreRepository) UpdateTraining(
 	ctx context.Context,
 	trainingUUID string,
-	user training.User,
-	updateFn func(ctx context.Context, tr *training.Training) (*training.Training, error),
+	user training2.User,
+	updateFn func(ctx context.Context, tr *training2.Training) (*training2.Training, error),
 ) error {
 	trainingsCollection := r.trainingsCollection()
 
@@ -101,7 +101,7 @@ func (r TrainingsFirestoreRepository) UpdateTraining(
 			return err
 		}
 
-		if err := training.CanUserSeeTraining(user, *tr); err != nil {
+		if err := training2.CanUserSeeTraining(user, *tr); err != nil {
 			return err
 		}
 
@@ -114,7 +114,7 @@ func (r TrainingsFirestoreRepository) UpdateTraining(
 	})
 }
 
-func (r TrainingsFirestoreRepository) marshalTraining(tr *training.Training) TrainingModel {
+func (r TrainingsFirestoreRepository) marshalTraining(tr *training2.Training) TrainingModel {
 	trainingModel := TrainingModel{
 		UUID:     tr.UUID(),
 		UserUUID: tr.UserUUID(),
@@ -135,16 +135,16 @@ func (r TrainingsFirestoreRepository) marshalTraining(tr *training.Training) Tra
 	return trainingModel
 }
 
-func (r TrainingsFirestoreRepository) unmarshalTraining(doc *firestore.DocumentSnapshot) (*training.Training, error) {
+func (r TrainingsFirestoreRepository) unmarshalTraining(doc *firestore.DocumentSnapshot) (*training2.Training, error) {
 	trainingModel := TrainingModel{}
 	err := doc.DataTo(&trainingModel)
 	if err != nil {
 		return nil, errors.Wrap(err, "unable to load document")
 	}
 
-	var moveProposedBy training.UserType
+	var moveProposedBy training2.UserType
 	if trainingModel.MoveProposedBy != nil {
-		moveProposedBy, err = training.NewUserTypeFromString(*trainingModel.MoveProposedBy)
+		moveProposedBy, err = training2.NewUserTypeFromString(*trainingModel.MoveProposedBy)
 		if err != nil {
 			return nil, err
 		}
@@ -155,7 +155,7 @@ func (r TrainingsFirestoreRepository) unmarshalTraining(doc *firestore.DocumentS
 		proposedTime = *trainingModel.ProposedTime
 	}
 
-	return training.UnmarshalTrainingFromDatabase(
+	return training2.UnmarshalTrainingFromDatabase(
 		trainingModel.UUID,
 		trainingModel.UserUUID,
 		trainingModel.User,

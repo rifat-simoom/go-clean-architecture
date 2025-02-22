@@ -2,30 +2,30 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/interfaces/services"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 
 	"github.com/pkg/errors"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
 type CancelTraining struct {
 	TrainingUUID string
-	User         training.User
+	User         training2.User
 }
 
 type CancelTrainingHandler decorator.CommandHandler[CancelTraining]
 
 type cancelTrainingHandler struct {
-	repo           training.Repository
+	repo           training2.Repository
 	userService    services.UserService
 	trainerService services.TrainerService
 }
 
 func NewCancelTrainingHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	userService services.UserService,
 	trainerService services.TrainerService,
 	logger *logrus.Entry,
@@ -57,12 +57,12 @@ func (h cancelTrainingHandler) Handle(ctx context.Context, cmd CancelTraining) (
 		ctx,
 		cmd.TrainingUUID,
 		cmd.User,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			if err := tr.Cancel(); err != nil {
 				return nil, err
 			}
 
-			if balanceDelta := training.CancelBalanceDelta(*tr, cmd.User.Type()); balanceDelta != 0 {
+			if balanceDelta := training2.CancelBalanceDelta(*tr, cmd.User.Type()); balanceDelta != 0 {
 				err := h.userService.UpdateTrainingBalance(ctx, tr.UserUUID(), balanceDelta)
 				if err != nil {
 					return nil, errors.Wrap(err, "unable to change trainings balance")

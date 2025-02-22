@@ -1,10 +1,10 @@
 package unit_test
 
 import (
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"testing"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -33,7 +33,7 @@ func TestTraining_RescheduleTraining_less_than_24h_before(t *testing.T) {
 
 	err := tr.RescheduleTraining(rescheduleRequestTime)
 
-	assert.EqualError(t, err, training.CantRescheduleBeforeTimeError{
+	assert.EqualError(t, err, training2.CantRescheduleBeforeTimeError{
 		TrainingTime: tr.Time(),
 	}.Error())
 }
@@ -42,18 +42,18 @@ func TestTraining_ProposeReschedule_by_attendee(t *testing.T) {
 	t.Parallel()
 	testCases := []struct {
 		Name     string
-		Proposer training.UserType
-		Approver training.UserType
+		Proposer training2.UserType
+		Approver training2.UserType
 	}{
 		{
 			Name:     "proposed_by_attendee",
-			Proposer: training.Attendee,
-			Approver: training.Trainer,
+			Proposer: training2.Attendee,
+			Approver: training2.Trainer,
 		},
 		{
 			Name:     "proposed_by_trainer",
-			Proposer: training.Trainer,
-			Approver: training.Attendee,
+			Proposer: training2.Trainer,
+			Approver: training2.Attendee,
 		},
 	}
 
@@ -83,13 +83,13 @@ func TestTraining_ProposeReschedule_by_attendee(t *testing.T) {
 func TestTraining_ProposeReschedule_approve_by_proposer(t *testing.T) {
 	t.Parallel()
 	testCases := []struct {
-		Proposer training.UserType
+		Proposer training2.UserType
 	}{
 		{
-			Proposer: training.Attendee,
+			Proposer: training2.Attendee,
 		},
 		{
-			Proposer: training.Trainer,
+			Proposer: training2.Trainer,
 		},
 	}
 
@@ -116,7 +116,7 @@ func TestTraining_ApproveReschedule_not_proposed(t *testing.T) {
 	t.Parallel()
 	tr := newExampleTrainingWithTime(t, time.Now().Round(time.Hour))
 
-	assert.EqualError(t, tr.ApproveReschedule(training.Trainer), training.ErrNoRescheduleRequested.Error())
+	assert.EqualError(t, tr.ApproveReschedule(training2.Trainer), training2.ErrNoRescheduleRequested.Error())
 }
 
 func TestTraining_RejectRescheduleTraining(t *testing.T) {
@@ -125,7 +125,7 @@ func TestTraining_RejectRescheduleTraining(t *testing.T) {
 	rescheduleRequestTime := originalTime.AddDate(0, 0, 5)
 	tr := newExampleTrainingWithTime(t, originalTime)
 
-	tr.ProposeReschedule(rescheduleRequestTime, training.Attendee)
+	tr.ProposeReschedule(rescheduleRequestTime, training2.Attendee)
 
 	err := tr.RejectReschedule()
 	assert.NoError(t, err)

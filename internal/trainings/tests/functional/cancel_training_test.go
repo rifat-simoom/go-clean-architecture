@@ -2,14 +2,14 @@ package functional_test
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/command"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )
@@ -20,9 +20,9 @@ func TestCancelTraining(t *testing.T) {
 
 	testCases := []struct {
 		Name     string
-		UserType training.UserType
+		UserType training2.UserType
 
-		TrainingConstructor func() *training.Training
+		TrainingConstructor func() *training2.Training
 
 		ShouldFail    bool
 		ExpectedError string
@@ -32,8 +32,8 @@ func TestCancelTraining(t *testing.T) {
 	}{
 		{
 			Name:     "return_training_balance_when_attendee_cancels",
-			UserType: training.Attendee,
-			TrainingConstructor: func() *training.Training {
+			UserType: training2.Attendee,
+			TrainingConstructor: func() *training2.Training {
 				return createExampleTraining(t, requestingUserID, time.Now().Add(48*time.Hour))
 			},
 			ShouldUpdateBalance:   true,
@@ -41,8 +41,8 @@ func TestCancelTraining(t *testing.T) {
 		},
 		{
 			Name:     "return_training_balance_when_trainer_cancels",
-			UserType: training.Trainer,
-			TrainingConstructor: func() *training.Training {
+			UserType: training2.Trainer,
+			TrainingConstructor: func() *training2.Training {
 				return createExampleTraining(t, "trainer-id", time.Now().Add(48*time.Hour))
 			},
 			ShouldUpdateBalance:   true,
@@ -50,8 +50,8 @@ func TestCancelTraining(t *testing.T) {
 		},
 		{
 			Name:     "extra_training_balance_when_trainer_cancels_before_24h",
-			UserType: training.Trainer,
-			TrainingConstructor: func() *training.Training {
+			UserType: training2.Trainer,
+			TrainingConstructor: func() *training2.Training {
 				return createExampleTraining(t, "trainer-id", time.Now().Add(12*time.Hour))
 			},
 			ShouldUpdateBalance:   true,
@@ -59,8 +59,8 @@ func TestCancelTraining(t *testing.T) {
 		},
 		{
 			Name:     "no_training_balance_returned_when_attendee_cancels_before_24h",
-			UserType: training.Attendee,
-			TrainingConstructor: func() *training.Training {
+			UserType: training2.Attendee,
+			TrainingConstructor: func() *training2.Training {
 				return createExampleTraining(t, requestingUserID, time.Now().Add(12*time.Hour))
 			},
 			ShouldUpdateBalance: false,
@@ -76,13 +76,13 @@ func TestCancelTraining(t *testing.T) {
 			deps := newDependencies()
 
 			tr := tc.TrainingConstructor()
-			deps.repository.Trainings = map[string]training.Training{
+			deps.repository.Trainings = map[string]training2.Training{
 				trainingUUID: *tr,
 			}
 
 			err := deps.handler.Handle(context.Background(), command.CancelTraining{
 				TrainingUUID: trainingUUID,
-				User:         training.MustNewUser(requestingUserID, tc.UserType),
+				User:         training2.MustNewUser(requestingUserID, tc.UserType),
 			})
 
 			if tc.ShouldFail {
@@ -106,8 +106,8 @@ func TestCancelTraining(t *testing.T) {
 	}
 }
 
-func createExampleTraining(t *testing.T, requestingUserID string, trainingTime time.Time) *training.Training {
-	tr, err := training.NewTraining(
+func createExampleTraining(t *testing.T, requestingUserID string, trainingTime time.Time) *training2.Training {
+	tr, err := training2.NewTraining(
 		uuid.New().String(),
 		requestingUserID,
 		"foo",
@@ -142,18 +142,18 @@ func newDependencies() dependencies {
 }
 
 type repositoryMock struct {
-	Trainings map[string]training.Training
+	Trainings map[string]training2.Training
 }
 
-func (r *repositoryMock) GetTraining(ctx context.Context, trainingUUID string, user training.User) (*training.Training, error) {
+func (r *repositoryMock) GetTraining(ctx context.Context, trainingUUID string, user training2.User) (*training2.Training, error) {
 	panic("implement me")
 }
 
 func (r *repositoryMock) UpdateTraining(
 	ctx context.Context,
 	trainingUUID string,
-	user training.User,
-	updateFn func(ctx context.Context, tr *training.Training) (*training.Training, error),
+	user training2.User,
+	updateFn func(ctx context.Context, tr *training2.Training) (*training2.Training, error),
 ) error {
 	tr, ok := r.Trainings[trainingUUID]
 	if !ok {
@@ -170,7 +170,7 @@ func (r *repositoryMock) UpdateTraining(
 	return nil
 }
 
-func (r repositoryMock) AddTraining(ctx context.Context, tr *training.Training) error {
+func (r repositoryMock) AddTraining(ctx context.Context, tr *training2.Training) error {
 	panic("implement me")
 }
 

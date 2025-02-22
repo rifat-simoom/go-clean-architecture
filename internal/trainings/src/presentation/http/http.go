@@ -2,16 +2,16 @@ package http
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/application"
-	command2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/command"
-	query2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/application/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/command"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"net/http"
 
 	"github.com/go-chi/render"
 	"github.com/google/uuid"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 )
 
 type HttpServer struct {
@@ -29,12 +29,12 @@ func (h HttpServer) GetTrainings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var appTrainings []query2.Training
+	var appTrainings []query.Training
 
 	if user.Role == "trainer" {
-		appTrainings, err = h.app.Queries.AllTrainings.Handle(r.Context(), query2.AllTrainings{})
+		appTrainings, err = h.app.Queries.AllTrainings.Handle(r.Context(), query.AllTrainings{})
 	} else {
-		appTrainings, err = h.app.Queries.TrainingsForUser.Handle(r.Context(), query2.TrainingsForUser{User: user})
+		appTrainings, err = h.app.Queries.TrainingsForUser.Handle(r.Context(), query.TrainingsForUser{User: user})
 	}
 
 	if err != nil {
@@ -66,7 +66,7 @@ func (h HttpServer) CreateTraining(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cmd := command2.ScheduleTraining{
+	cmd := command.ScheduleTraining{
 		TrainingUUID: uuid.New().String(),
 		UserUUID:     user.UUID,
 		UserName:     user.DisplayName,
@@ -90,7 +90,7 @@ func (h HttpServer) CancelTraining(w http.ResponseWriter, r *http.Request, train
 		return
 	}
 
-	err = h.app.Commands.CancelTraining.Handle(r.Context(), command2.CancelTraining{
+	err = h.app.Commands.CancelTraining.Handle(r.Context(), command.CancelTraining{
 		TrainingUUID: trainingUUID,
 		User:         user,
 	})
@@ -113,7 +113,7 @@ func (h HttpServer) RescheduleTraining(w http.ResponseWriter, r *http.Request, t
 		return
 	}
 
-	err = h.app.Commands.RescheduleTraining.Handle(r.Context(), command2.RescheduleTraining{
+	err = h.app.Commands.RescheduleTraining.Handle(r.Context(), command.RescheduleTraining{
 		User:         user,
 		TrainingUUID: trainingUUID,
 		NewTime:      rescheduleTraining.Time,
@@ -138,7 +138,7 @@ func (h HttpServer) RequestRescheduleTraining(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	err = h.app.Commands.RequestTrainingReschedule.Handle(r.Context(), command2.RequestTrainingReschedule{
+	err = h.app.Commands.RequestTrainingReschedule.Handle(r.Context(), command.RequestTrainingReschedule{
 		User:         user,
 		TrainingUUID: trainingUUID,
 		NewTime:      rescheduleTraining.Time,
@@ -157,7 +157,7 @@ func (h HttpServer) ApproveRescheduleTraining(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	err = h.app.Commands.ApproveTrainingReschedule.Handle(r.Context(), command2.ApproveTrainingReschedule{
+	err = h.app.Commands.ApproveTrainingReschedule.Handle(r.Context(), command.ApproveTrainingReschedule{
 		User:         user,
 		TrainingUUID: trainingUUID,
 	})
@@ -174,7 +174,7 @@ func (h HttpServer) RejectRescheduleTraining(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	err = h.app.Commands.RejectTrainingReschedule.Handle(r.Context(), command2.RejectTrainingReschedule{
+	err = h.app.Commands.RejectTrainingReschedule.Handle(r.Context(), command.RejectTrainingReschedule{
 		User:         user,
 		TrainingUUID: trainingUUID,
 	})
@@ -184,7 +184,7 @@ func (h HttpServer) RejectRescheduleTraining(w http.ResponseWriter, r *http.Requ
 	}
 }
 
-func appTrainingsToResponse(appTrainings []query2.Training) []Training {
+func appTrainingsToResponse(appTrainings []query.Training) []Training {
 	var trainings []Training
 	for _, tm := range appTrainings {
 		t := Training{

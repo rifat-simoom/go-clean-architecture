@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
+	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
 	"time"
 
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
 	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/domain/training"
 	"github.com/sirupsen/logrus"
 )
 
@@ -14,7 +14,7 @@ type RequestTrainingReschedule struct {
 	TrainingUUID string
 	NewTime      time.Time
 
-	User training.User
+	User training2.User
 
 	NewNotes string
 }
@@ -22,11 +22,11 @@ type RequestTrainingReschedule struct {
 type RequestTrainingRescheduleHandler decorator.CommandHandler[RequestTrainingReschedule]
 
 type requestTrainingRescheduleHandler struct {
-	repo training.Repository
+	repo training2.Repository
 }
 
 func NewRequestTrainingRescheduleHandler(
-	repo training.Repository,
+	repo training2.Repository,
 	logger *logrus.Entry,
 	metricsClient decorator.MetricsClient,
 ) RequestTrainingRescheduleHandler {
@@ -50,7 +50,7 @@ func (h requestTrainingRescheduleHandler) Handle(ctx context.Context, cmd Reques
 		ctx,
 		cmd.TrainingUUID,
 		cmd.User,
-		func(ctx context.Context, tr *training.Training) (*training.Training, error) {
+		func(ctx context.Context, tr *training2.Training) (*training2.Training, error) {
 			if err := tr.UpdateNotes(cmd.NewNotes); err != nil {
 				return nil, err
 			}

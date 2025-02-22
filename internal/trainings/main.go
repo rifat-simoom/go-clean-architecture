@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/infrastructure/configs"
-	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/presentation/http"
+	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/configs"
+	http3 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/presentation/http"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -20,6 +20,6 @@ func main() {
 	defer cleanup()
 
 	server.RunHTTPServer(func(router chi.Router) http.Handler {
-		return http2.HandlerFromMux(http2.NewHttpServer(app), router)
+		return http3.HandlerFromMux(http3.NewHttpServer(app), router)
 	})
 }
