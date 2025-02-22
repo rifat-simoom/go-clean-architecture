@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package users;
 
-option go_package = "github.com/rifat-simoom/go-clean-architecture/internal/users";
+option go_package = "github.com/rifat-simoom/go-hexarch/internal/users";
 
 import "google/protobuf/empty.proto";
 

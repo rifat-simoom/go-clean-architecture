@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package trainer;
 
-option go_package = "github.com/rifat-simoom/go-clean-architecture/internal/trainer";
+option go_package = "github.com/rifat-simoom/go-hexarch/internal/trainer";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";

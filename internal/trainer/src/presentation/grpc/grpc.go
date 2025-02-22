@@ -2,14 +2,14 @@ package grpc
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/query"
 	"time"
 
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/trainer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

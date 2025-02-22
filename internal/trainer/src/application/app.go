@@ -1,8 +1,8 @@
 package application
 
 import (
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/query"
 )
 
 type Application struct {

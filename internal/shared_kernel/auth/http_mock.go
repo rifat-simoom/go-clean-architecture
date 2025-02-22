@@ -6,7 +6,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server/httperr"
 )
 
 // HttpMockMiddleware is used in the local environment (which doesn't depend on Firebase)

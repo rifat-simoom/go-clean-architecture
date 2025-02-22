@@ -1,7 +1,7 @@
 package unit_test
 
 import (
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

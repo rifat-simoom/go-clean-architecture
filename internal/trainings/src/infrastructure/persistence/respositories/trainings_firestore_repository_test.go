@@ -2,9 +2,9 @@ package respositories_test
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
-	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/persistence/respositories"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/query"
+	training2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/infrastructure/persistence/respositories"
 	"math/rand"
 	"os"
 	"testing"

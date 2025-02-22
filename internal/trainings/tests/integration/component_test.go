@@ -2,8 +2,8 @@ package integration
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/configs"
-	http3 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/presentation/http"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/infrastructure/configs"
+	http3 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/presentation/http"
 	"log"
 	"net/http"
 	"os"
@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/tests"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/tests"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,10 +1,10 @@
-module github.com/rifat-simoom/go-clean-architecture/internal/trainer
+module github.com/rifat-simoom/go-hexarch/internal/trainer
 
 go 1.18
 
 require (
 	cloud.google.com/go/firestore v1.5.0
-	github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel v0.0.0-00010101000000-000000000000
+	github.com/rifat-simoom/go-hexarch/internal/shared_kernel v0.0.0-00010101000000-000000000000
 	github.com/deepmap/oapi-codegen v1.9.0
 	github.com/go-chi/chi/v5 v5.0.5
 	github.com/go-chi/render v1.0.1
@@ -60,4 +60,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
 
-replace github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel => ../shared_kernel/
+replace github.com/rifat-simoom/go-hexarch/internal/shared_kernel => ../shared_kernel/

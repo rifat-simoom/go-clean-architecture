@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	trainerService "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/configs"
-	trainingsService "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/configs"
+	trainerService "github.com/rifat-simoom/go-hexarch/internal/trainer/src/infrastructure/configs"
+	trainingsService "github.com/rifat-simoom/go-hexarch/internal/trainings/src/infrastructure/configs"
 	"os"
 
 	"github.com/krzysztofreczek/go-structurizr/pkg/scraper"

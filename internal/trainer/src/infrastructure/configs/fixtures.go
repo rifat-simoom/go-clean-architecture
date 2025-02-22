@@ -2,9 +2,9 @@ package configs
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/query"
 	"math/rand"
 	"time"
 

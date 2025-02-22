@@ -2,17 +2,17 @@ package configs
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
-	respositories2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/infrastructure/persistence/respositories"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/tests/integration"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/interfaces/services"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/query"
+	respositories2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/infrastructure/persistence/respositories"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/tests/integration"
 	"os"
 
 	"cloud.google.com/go/firestore"
-	grpcClient "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
+	grpcClient "github.com/rifat-simoom/go-hexarch/internal/shared_kernel/client"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/metrics"
 	"github.com/sirupsen/logrus"
 )
 

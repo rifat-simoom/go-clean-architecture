@@ -1,15 +1,15 @@
 package http
 
 import (
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/query"
 	"net/http"
 
 	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 	"github.com/go-chi/render"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server/httperr"
 )
 
 type HttpServer struct {

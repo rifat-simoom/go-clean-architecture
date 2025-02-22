@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
-	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
+	hour2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/domain/hour"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/decorator"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/errors"
 	"github.com/sirupsen/logrus"
 )
 

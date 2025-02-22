@@ -1,11 +1,11 @@
-module github.com/rifat-simoom/go-clean-architecture/internal/users
+module github.com/rifat-simoom/go-hexarch/internal/users
 
 go 1.18
 
 require (
 	cloud.google.com/go/firestore v1.5.0
 	firebase.google.com/go/v4 v4.7.1
-	github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel v0.0.0-00010101000000-000000000000
+	github.com/rifat-simoom/go-hexarch/internal/shared_kernel v0.0.0-00010101000000-000000000000
 	github.com/go-chi/chi/v5 v5.0.5
 	github.com/go-chi/render v1.0.1
 	github.com/golang/protobuf v1.5.2
@@ -49,4 +49,4 @@ require (
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 )
 
-replace github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel => ../shared_kernel/
+replace github.com/rifat-simoom/go-hexarch/internal/shared_kernel => ../shared_kernel/

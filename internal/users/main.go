@@ -9,9 +9,9 @@ import (
 
 	"cloud.google.com/go/firestore"
 	"github.com/go-chi/chi/v5"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/users"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/logs"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server"
 	"google.golang.org/grpc"
 )
 

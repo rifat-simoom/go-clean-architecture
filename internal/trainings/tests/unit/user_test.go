@@ -1,7 +1,7 @@
 package unit_test
 
 import (
-	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	training2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"testing"
 	"time"
 

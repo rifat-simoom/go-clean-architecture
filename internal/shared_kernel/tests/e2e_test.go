@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/client"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/users"
 	"github.com/stretchr/testify/require"
 )
 

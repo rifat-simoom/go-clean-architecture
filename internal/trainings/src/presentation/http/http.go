@@ -2,16 +2,16 @@ package http
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"net/http"
 
 	"github.com/go-chi/render"
 	"github.com/google/uuid"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server/httperr"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server/httperr"
 )
 
 type HttpServer struct {

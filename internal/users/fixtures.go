@@ -9,8 +9,8 @@ import (
 	firebase "firebase.google.com/go/v4"
 	"firebase.google.com/go/v4/auth"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/client"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/users"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/api/option"
 )

@@ -2,12 +2,12 @@ package command
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/interfaces/services"
-	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/interfaces/services"
+	training2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/logs"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/decorator"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/logs"
 	"github.com/sirupsen/logrus"
 )
 

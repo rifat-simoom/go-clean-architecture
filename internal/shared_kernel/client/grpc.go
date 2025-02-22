@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/trainer"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/users"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

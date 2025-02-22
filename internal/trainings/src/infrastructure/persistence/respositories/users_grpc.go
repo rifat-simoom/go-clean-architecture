@@ -3,7 +3,7 @@ package respositories
 import (
 	"context"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/users"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/users"
 )
 
 type UsersGrpc struct {

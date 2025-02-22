@@ -2,14 +2,14 @@ package functional_test
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/command"
-	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/command"
+	training2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/metrics"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )

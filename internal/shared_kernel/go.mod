@@ -1,4 +1,4 @@
-module github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel
+module github.com/rifat-simoom/go-hexarch/internal/shared_kernel
 
 go 1.18
 

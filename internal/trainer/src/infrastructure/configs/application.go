@@ -2,15 +2,15 @@ package configs
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/command"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/application/query"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
-	repositories2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/persistence/repositories"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/command"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/application/query"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/domain/hour"
+	repositories2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/infrastructure/persistence/repositories"
 	"os"
 
 	"cloud.google.com/go/firestore"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/metrics"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/metrics"
 	"github.com/sirupsen/logrus"
 )
 

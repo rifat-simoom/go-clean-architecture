@@ -3,8 +3,8 @@ package query
 import (
 	"context"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/auth"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/auth"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/decorator"
 	"github.com/sirupsen/logrus"
 )
 

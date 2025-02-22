@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/decorator"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/errors"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/decorator"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/errors"
 	"github.com/sirupsen/logrus"
 )
 

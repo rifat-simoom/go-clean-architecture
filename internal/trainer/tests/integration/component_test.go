@@ -2,9 +2,9 @@ package integration
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/configs"
-	presentation2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/grpc"
-	http2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/presentation/http"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/infrastructure/configs"
+	presentation2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/presentation/grpc"
+	http2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/presentation/http"
 	"log"
 	"net/http"
 	"os"
@@ -13,10 +13,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	trainerHTTP "github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/client/trainer"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/genproto/trainer"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/server"
-	"github.com/rifat-simoom/go-clean-architecture/internal/shared_kernel/tests"
+	trainerHTTP "github.com/rifat-simoom/go-hexarch/internal/shared_kernel/client/trainer"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/genproto/trainer"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/server"
+	"github.com/rifat-simoom/go-hexarch/internal/shared_kernel/tests"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 )

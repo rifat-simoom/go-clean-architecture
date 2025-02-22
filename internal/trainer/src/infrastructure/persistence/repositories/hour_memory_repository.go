@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
+	"github.com/rifat-simoom/go-hexarch/internal/trainer/src/domain/hour"
 	"sync"
 	"time"
 )

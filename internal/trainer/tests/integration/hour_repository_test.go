@@ -3,8 +3,8 @@ package integration_test
 import (
 	"context"
 	"errors"
-	hour2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/domain/hour"
-	repositories2 "github.com/rifat-simoom/go-clean-architecture/internal/trainer/src/infrastructure/persistence/repositories"
+	hour2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/domain/hour"
+	repositories2 "github.com/rifat-simoom/go-hexarch/internal/trainer/src/infrastructure/persistence/repositories"
 	"math/rand"
 	"os"
 	"sync"

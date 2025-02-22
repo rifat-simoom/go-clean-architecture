@@ -2,8 +2,8 @@ package respositories
 
 import (
 	"context"
-	"github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/application/query"
-	training2 "github.com/rifat-simoom/go-clean-architecture/internal/trainings/src/domain/training"
+	"github.com/rifat-simoom/go-hexarch/internal/trainings/src/application/query"
+	training2 "github.com/rifat-simoom/go-hexarch/internal/trainings/src/domain/training"
 	"sort"
 	"time"
 
